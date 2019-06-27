@@ -4,10 +4,13 @@ defmodule Cashier.List do
   import Ecto.Changeset
 
   alias __MODULE__, as: List
+  alias Cashier.Price
 
   schema "lists" do
     field :name, :string
     field :properties, :map
+
+    has_many :prices, Price
   end
 
   def changeset(%List{} = list, attrs) do
