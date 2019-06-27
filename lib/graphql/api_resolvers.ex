@@ -28,22 +28,12 @@ defmodule GraphQL.ApiResolvers do
   end
 
   def find_item_price(item, _args, %{context: %{loader: loader}}) do
-    %{sources: %{Cashier => %{results: results}}} = loader
+    loader
+    |> Dataloader.load(Cashier, :prices, item)
+    |> on_load(fn loader ->
+      prices = Dataloader.get(loader, Cashier, :prices, item)
 
-    data =
-      results
-      |> Map.to_list()
-      |> Enum.at(0)
-
-    {_, {:ok, %{[1] => values}}} = data
-
-    price =
-      values
-      |> Enum.filter(fn value ->
-        Map.get(value, :item_id) == item.id
-      end)
-      |> Enum.at(0)
-
-    {:ok, price}
+      {:ok, Enum.at(prices, 0)}
+    end)
   end
 end
