@@ -4,7 +4,7 @@ defmodule Cashier.Price do
   import Ecto.Changeset
 
   alias __MODULE__, as: Price
-  alias Cashier.List
+  alias Cashier.{List, Item}
 
   schema "prices" do
     field :properties, :map
