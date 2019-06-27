@@ -3,8 +3,7 @@ defmodule ElxloaderWeb.Router do
 
   alias GraphQL.ApiSchema
 
-  forward "/api", Absinthe.Plug,
-    schema: ApiSchema
+  forward "/api", Absinthe.Plug, schema: ApiSchema
 
   forward "/graphiql", Absinthe.Plug.GraphiQL,
     schema: ApiSchema,
