@@ -1,11 +1,12 @@
 defmodule ElxloaderWeb.Router do
   use ElxloaderWeb, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  alias GraphQL.ApiSchema
 
-  scope "/api", ElxloaderWeb do
-    pipe_through :api
-  end
+  forward "/api", Absinthe.Plug,
+    schema: ApiSchema
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: ApiSchema,
+    interface: :playground
 end
