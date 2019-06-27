@@ -4,8 +4,11 @@ defmodule Cashier do
   alias Elxloader.Repo
   alias Cashier.{List}
 
-  def get_list(id) do
-    List
-    |> Repo.get(id)
+  def data() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _) do
+    queryable
   end
 end
