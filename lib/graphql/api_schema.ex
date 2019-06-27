@@ -9,11 +9,11 @@ defmodule GraphQL.ApiSchema do
   # Dataloader Configuration
 
   def plugins do
-    [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults]
+    [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
   end
 
   def dataloader() do
-    Dataloader.new
+    Dataloader.new()
     |> Dataloader.add_source(Cashier, Cashier.data())
   end
 
